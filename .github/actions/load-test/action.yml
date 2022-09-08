@@ -20,7 +20,7 @@ runs:
       uses: docker://artilleryio/artillery:latest
       with:
         entrypoint: /home/node/artillery/bin/run
-        args: run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/websocket.yml
+        args: run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/websockets.yml
 
     - name: Generate HTML report
       uses: docker://artilleryio/artillery:latest
