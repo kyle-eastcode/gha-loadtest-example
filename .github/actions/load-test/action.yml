@@ -1,0 +1,35 @@
+name: Load Test
+description: Use Artillery.io to perform pre-defined load tests from the selected package
+inputs:
+  package:
+    description: 'The package you wish to run your load tests against'
+    required: true
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Copy test files
+      uses: Bhacaz/checkout-files@v2
+      with:
+        files: packages/${{ inputs.package }}/loadtest
+
+    - name: Create new reports folder
+      shell: bash
+      run: mkdir ./reports
+
+    - name: Execute load tests
+      id: execute-load-tests
+      shell: bash
+      run: /home/node/artillery/bin/artillery run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*.yml
+
+    - name: Generate HTML report
+      id: generate-html-report
+      shell: bash
+      run: /home/node/artillery/bin/artillery report --output reports/${{ inputs.package }} reports/${{ inputs.package }}-report.json
+
+    - name: Archive test report
+      uses: actions/upload-artifact@v2
+      with:
+        name: artillery-test-report
+        path: reports/*

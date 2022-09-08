@@ -1,0 +1,23 @@
+name: Perform Load Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        type: choice
+        description: What package do you want to run load tests against
+        required: true
+        options:
+          - main
+
+jobs:
+  perform-load-tests:
+    name: Perform Load Tests
+    runs-on: ubuntu-latest
+    container: artilleryio/artillery:latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: perform-load-test
+        uses: ./.github/actions/load-test
+        with:
+          package: ${{ inputs.package }}

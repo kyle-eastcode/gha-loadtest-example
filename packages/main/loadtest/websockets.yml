@@ -1,0 +1,11 @@
+config:
+  target: 'wss://api.testnet.solana.com'
+  phases:
+    - duration: 1
+      arrivalRate: 1
+      name: Smoke Test
+
+scenarios:
+  - engine: 'ws'
+    flow:
+      - think: 5
