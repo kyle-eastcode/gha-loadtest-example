@@ -14,20 +14,15 @@ runs:
       with:
         files: packages/${{ inputs.package }}/loadtest
 
-    - name: Create new reports folder
-      shell: bash
-      run: |
-        mkdir -p reports
-
     - name: Execute load tests
       id: execute-load-tests
       shell: bash
-      run: /home/node/artillery/bin/artillery run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*.yml
+      run: /home/node/artillery/bin/artillery run --output ${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*.yml
 
     - name: Generate HTML report
       id: generate-html-report
       shell: bash
-      run: /home/node/artillery/bin/artillery report --output reports/${{ inputs.package }} reports/${{ inputs.package }}-report.json
+      run: /home/node/artillery/bin/artillery report --output ${{ inputs.package }}-report.html ${{ inputs.package }}-report.json
 
     - name: Archive test report
       uses: actions/upload-artifact@v2
