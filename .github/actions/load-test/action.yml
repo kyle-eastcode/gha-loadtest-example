@@ -20,13 +20,13 @@ runs:
       uses: docker://artilleryio/artillery:latest
       with:
         entrypoint: /home/node/artillery/bin/run
-        args: -v ./packages/${{ inputs.package }}/loadtest:packages/${{ inputs.package }}/loadtest run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/websockets.yml
+        args: run --output ./reports/${{ inputs.package }}-report.json ./packages/${{ inputs.package }}/loadtest/websockets.yml
 
     - name: Generate HTML report
       uses: docker://artilleryio/artillery:latest
       with:
         entrypoint: /home/node/artillery/bin/run
-        args: report --output reports/${{ inputs.package }}.html reports/${{ inputs.package }}-report.json
+        args: report --output ./reports/${{ inputs.package }}.html ./reports/${{ inputs.package }}-report.json
 
     - name: Archive test report
       uses: actions/upload-artifact@v2
