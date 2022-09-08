@@ -29,7 +29,7 @@ runs:
       uses: docker://artilleryio/artillery
       with:
         entrypoint: /home/node/artillery/bin/run
-        args: run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest
+        args: run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*
 
     - name: Generate HTML report
       if: ${{ inputs.package != 'custom' }}
