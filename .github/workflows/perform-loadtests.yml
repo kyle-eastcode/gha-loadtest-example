@@ -7,11 +7,13 @@ jobs:
   artillery:
     runs-on: ubuntu-latest
 
-    container: artilleryio/artillery:latest
+    container: artilleryio/artillery
 
     steps:
       - name: Checkout repository
+        id: clone-repo
         uses: actions/checkout@v2
 
       - name: Execute load tests
+        id: execute-load-tests
         run: /home/node/artillery/bin/artillery run loadtest/websockets.yml
