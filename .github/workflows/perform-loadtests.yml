@@ -44,12 +44,12 @@ on:
           - custom
       custom-run:
         type: string
-        description: The custom artillery run command to be passed when package is set to custom
+        description: '[CUSTOM ONLY]: The custom run command passed to artillery'
         required: false
         default: ''
       custom-report:
         type: string
-        description: The custom artillery run command to be passed when package is set to custom
+        description: '[CUSTOM ONLY]: The custom report command passed to artillery'
         required: false
         default: ''
 
