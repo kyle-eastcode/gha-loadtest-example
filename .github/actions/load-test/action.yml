@@ -29,14 +29,14 @@ runs:
       uses: docker://artilleryio/artillery
       with:
         entrypoint: /home/node/artillery/bin/run
-        args: run --output ./reports/${{ inputs.package }}-report.json ./packages/${{ inputs.package }}/loadtest/
+        args: run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest
 
     - name: Generate HTML report
       if: ${{ inputs.package != 'custom' }}
       uses: docker://artilleryio/artillery
       with:
         entrypoint: /home/node/artillery/bin/run
-        args: report --output ./reports/${{ inputs.package }}.html ./reports/${{ inputs.package }}-report.json
+        args: report --output reports/${{ inputs.package }}.html reports/${{ inputs.package }}-report.json
 
     - name: Execute custom load tests
       if: ${{ inputs.package == 'custom' && inputs.custom-run != '' }}
