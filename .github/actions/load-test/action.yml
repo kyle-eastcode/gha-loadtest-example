@@ -19,14 +19,14 @@ runs:
     - name: Execute load tests
       uses: docker://artilleryio/artillery:latest
       with:
-        entrypoint: run
-        args: --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*
+        entrypoint: /home/node/artillery/bin/run
+        args: run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*
 
     - name: Generate HTML report
       uses: docker://artilleryio/artillery:latest
       with:
-        entrypoint: report
-        args: --output reports/${{ inputs.package }}.html reports/${{ inputs.package }}-report.json
+        entrypoint: /home/node/artillery/bin/run
+        args: report --output reports/${{ inputs.package }}.html reports/${{ inputs.package }}-report.json
 
     - name: Archive test report
       uses: actions/upload-artifact@v2
