@@ -17,15 +17,20 @@ runs:
     - name: Execute load tests
       id: execute-load-tests
       shell: bash
-      run: /home/node/artillery/bin/artillery run --output ${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*.yml
+      run: /home/node/artillery/bin/artillery run packages/${{ inputs.package }}/loadtest/*.yml
 
-    - name: Generate HTML report
-      id: generate-html-report
-      shell: bash
-      run: /home/node/artillery/bin/artillery report --output ${{ inputs.package }}-report.html ${{ inputs.package }}-report.json
+    # - name: Execute load tests
+    #   id: execute-load-tests
+    #   shell: bash
+    #   run: /home/node/artillery/bin/artillery run --output ${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*.yml
 
-    - name: Archive test report
-      uses: actions/upload-artifact@v2
-      with:
-        name: artillery-test-report
-        path: reports/*
+    # - name: Generate HTML report
+    #   id: generate-html-report
+    #   shell: bash
+    #   run: /home/node/artillery/bin/artillery report --output ${{ inputs.package }}-report.html ${{ inputs.package }}-report.json
+
+    # - name: Archive test report
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: artillery-test-report
+    #     path: ${{ inputs.package }}-report.json
