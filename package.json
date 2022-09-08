@@ -8,9 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "loadtest:main": "artillery run packages/main/loadtest/websockets.yml",
-    "loadtest:report:main": "yarn run clean:reports && artillery run --output reports/main-report.json packages/main/loadtest/*.yml && artillery report --output reports/main-report reports/main-report.json",
-    "clean:reports": "rm -rf ./reports && mkdir ./reports"
+    "loadtest": "artillery run loadtest/websockets.yml"
   },
   "repository": {
     "type": "git",

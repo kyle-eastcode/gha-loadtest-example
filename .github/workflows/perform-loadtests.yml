@@ -1,23 +1,17 @@
-name: Perform Load Tests
+name: Artillery Socket.IO Load Test
 
 on:
   workflow_dispatch:
-    inputs:
-      package:
-        type: choice
-        description: What package do you want to run load tests against
-        required: true
-        options:
-          - main
 
 jobs:
-  perform-load-tests:
-    name: Perform Load Tests
+  artillery:
     runs-on: ubuntu-latest
+
     container: artilleryio/artillery:latest
+
     steps:
-      - uses: actions/checkout@v3
-      - id: perform-load-test
-        uses: ./.github/actions/load-test
-        with:
-          package: ${{ inputs.package }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Execute load tests
+        run: /home/node/artillery/bin/artillery run loadtest/websockets.yml
