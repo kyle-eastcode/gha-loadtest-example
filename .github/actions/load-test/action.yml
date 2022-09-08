@@ -16,7 +16,8 @@ runs:
 
     - name: Create new reports folder
       shell: bash
-      run: mkdir ./reports
+      run: |
+        mkdir -p ./reports
 
     - name: Execute load tests
       id: execute-load-tests
