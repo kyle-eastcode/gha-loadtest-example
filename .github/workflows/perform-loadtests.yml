@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  artillery:
+  load-test:
     runs-on: ubuntu-latest
 
     container: artilleryio/artillery
@@ -16,4 +16,4 @@ jobs:
 
       - name: Execute load tests
         id: execute-load-tests
-        run: /home/node/artillery/bin/artillery run loadtest/websockets.yml
+        run: /home/node/artillery/bin/run run loadtest/websockets.yml
