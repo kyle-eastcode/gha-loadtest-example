@@ -6,11 +6,11 @@ inputs:
     required: true
     default: ''
   custom-run:
-    description: 'Your custom artillery run command to be passed when package is set to custom'
+    description: 'The custom artillery run command to be passed when package is set to custom'
     required: false
     default: ''
   custom-report:
-    description: 'Your custom artillery report command to be passed when package is set to custom'
+    description: 'The custom artillery report command to be passed when package is set to custom'
     required: false
     default: ''
 

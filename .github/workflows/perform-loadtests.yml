@@ -63,3 +63,5 @@ jobs:
         uses: ./.github/actions/load-test
         with:
           package: ${{ inputs.package }}
+          custom-run: ${{ inputs.custom-run }}
+          custom-report: ${{ inputs.custom-report }}
