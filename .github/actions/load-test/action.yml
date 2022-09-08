@@ -5,6 +5,14 @@ inputs:
     description: 'The package you wish to run your load tests against'
     required: true
     default: ''
+  custom-run:
+    description: 'Your custom artillery run command to be passed when package is set to custom'
+    required: false
+    default: ''
+  custom-report:
+    description: 'Your custom artillery report command to be passed when package is set to custom'
+    required: false
+    default: ''
 
 runs:
   using: 'composite'
@@ -17,16 +25,32 @@ runs:
       run: mkdir reports
 
     - name: Execute load tests
+      if: ${{ inputs.package != 'custom' }}
       uses: docker://artilleryio/artillery:latest
       with:
         entrypoint: /home/node/artillery/bin/run
         args: run --output ./reports/${{ inputs.package }}-report.json ./packages/${{ inputs.package }}/loadtest/websockets.yml
 
     - name: Generate HTML report
+      if: ${{ inputs.package != 'custom' }}
       uses: docker://artilleryio/artillery:latest
       with:
         entrypoint: /home/node/artillery/bin/run
         args: report --output ./reports/${{ inputs.package }}.html ./reports/${{ inputs.package }}-report.json
+
+    - name: Execute custom load tests
+      if: ${{ inputs.package == 'custom' && inputs.custom-run != '' }}
+      uses: docker://artilleryio/artillery:latest
+      with:
+        entrypoint: /home/node/artillery/bin/run
+        args: ${{ inputs.custom-run }}
+
+    - name: Generate Custom HTML report
+      if: ${{ inputs.package == 'custom' && inputs.custom-report != '' }}
+      uses: docker://artilleryio/artillery:latest
+      with:
+        entrypoint: /home/node/artillery/bin/run
+        args: ${{ inputs.custom-report }}
 
     - name: Archive test report
       uses: actions/upload-artifact@v2

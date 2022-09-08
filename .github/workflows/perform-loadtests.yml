@@ -41,6 +41,10 @@ on:
         required: true
         options:
           - main
+      custom-run:
+        type: string
+        description: The custom artillery run command to be passed when package is set to custom
+        required: false
 
 jobs:
   perform-load-tests:
