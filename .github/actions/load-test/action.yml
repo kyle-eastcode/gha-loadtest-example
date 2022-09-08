@@ -9,22 +9,16 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Copy test files
-      uses: Bhacaz/checkout-files@v2
-      with:
-        files: packages/${{ inputs.package }}/loadtest
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Make reports directory
-      shell: bash
-      run: |
-        mkdir reports
+      run: mkdir reports
 
     - name: Execute load tests
-      shell: bash
       run: /home/node/artillery/bin/run run --output reports/${{ inputs.package }}-report.json packages/${{ inputs.package }}/loadtest/*
 
     - name: Generate HTML report
-      shell: bash
       run: /home/node/artillery/bin/run report --output reports/${{ inputs.package }}.html reports/${{ inputs.package }}-report.json
 
     - name: Archive test report

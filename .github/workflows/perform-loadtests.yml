@@ -46,7 +46,7 @@ jobs:
   perform-load-tests:
     name: Perform Load Tests
     runs-on: ubuntu-latest
-    container: artilleryio/artillery:latest
+    container: artilleryio/artillery
     steps:
       - uses: actions/checkout@v3
       - id: perform-load-test
