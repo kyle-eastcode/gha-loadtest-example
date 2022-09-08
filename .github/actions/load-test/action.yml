@@ -17,7 +17,7 @@ runs:
     - name: Execute load tests
       id: execute-load-tests
       shell: bash
-      run: /home/node/artillery/bin/artillery run packages/${{ inputs.package }}/loadtest/*.yml
+      run: /home/node/artillery/bin/artillery run packages/${{ inputs.package }}/loadtest/*
 
     # - name: Execute load tests
     #   id: execute-load-tests
