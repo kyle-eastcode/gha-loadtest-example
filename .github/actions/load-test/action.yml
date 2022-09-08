@@ -15,7 +15,9 @@ runs:
         files: packages/${{ inputs.package }}/loadtest
 
     - name: Make reports directory
-      run: mkdir reports
+      shell: bash
+      run: |
+        mkdir reports
 
     - name: Execute load tests
       shell: bash
